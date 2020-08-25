@@ -1,0 +1,184 @@
+/* Text controlls for NAvbar*/
+.navbar {
+  font-family: 'Montserrat', sans-serif;
+  /* change font herer*/
+  font-weight: 400;
+  /* Self Explanatory*/
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar-nav>li {
+  margin-left: 30px;
+  /* Conntrolls Spacing between items in Navbar*/
+  margin-right: 30px;
+  opacity: .5;
+  /* opacity of text in list*/
+}
+
+/* Text controlls for "jumbotron"*/
+.jumbotron {
+  text-align: center;
+  /* Do not touch*/
+  font-family: 'Montserrat', sans-serif;
+  /* Font for heading r*/
+  padding-top: 10rem;
+  /* do not touch */
+  padding-bottom: 10rem;
+  /* do not touch*/
+}
+
+.bg-cover {
+  background-image: url("img/homePagePhoto.jpg");
+  /* Change background image on home page here*/
+}
+
+/* DO NOT TOUCH*/
+.bg-cover {
+  background-size: cover;
+  color: white;
+  background-position: center center;
+  position: relative;
+}
+
+
+/* Button Conntrolls for button on jumbotron*/
+.btn-home {
+  color: #000000;
+  /* color for button text */
+  font-family: 'Montserrat', sans-serif;
+  /* font for button in jumbotron*/
+  font-weight: 400;
+  /* Font weight */
+  font-size: 16px;
+  /* Font size*/
+  background-color: #ffffff;
+  /* Background color of button*/
+  border-color: transparent;
+  text-transform: uppercase;
+  /* Forces text to be upper case */
+  position: relative;
+}
+
+/* Controlls for service description heading */
+.description h1 {
+  font-family: 'Montserrat', sans-serif;
+  /* Font*/
+  text-transform: uppercase;
+  /* Makes text all uppercase*/
+  font-weight: 400;
+  font-size: 24px;
+  /*font size*/
+  margin-left: 60px;
+  /* margin between side of screen and text*/
+
+  color: #000000;
+  /* Color of text*/
+}
+
+/* Conntrolls for paragraph description of service */
+.description p {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 200;
+  font-size: 18px;
+  color: #000000;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: 2px;
+}
+
+/* DO NOT TOUCH*2
+.card {
+  margin: 0 auto;
+  /* Added */
+  float: none;
+  /* Added */
+  margin-bottom: 10px;
+  /* Added */
+}
+
+/* Controlls for text in the Card*/
+.card{
+
+}
+.card p {
+  font-weight: 200;
+  font-size: 16px;
+}
+.card-text{
+  font-weight: 200;
+  font-size: 16px;
+}
+
+.movies h3 {
+  text-align: center;
+}
+
+.movies img {
+  width: auto;
+  height: 400px;
+}
+
+.more-info h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  opacity: .5;
+}
+
+.more-info p {
+  padding-left: 20vw;
+  padding-right: 20vw;
+  font-family: 'Montserrat', sans-serif;
+  /* change font herer*/
+  font-weight: 200;
+  /* Self Explanatory*/
+  font-size: 26px;
+  line-height: 2;
+}
+.jumbotron-custom{
+padding-top: 20px;
+padding-bottom: 20px;
+
+}
+
+.clean-text h1 {
+  font-family: 'Montserrat', sans-serif;
+  /* change font herer*/
+  font-weight: bold;
+  /* Self Explanatory*/
+  font-size: 34px;
+  font-weight: 400;
+}
+
+.clean-text p {
+  font-family: 'Montserrat', sans-serif;
+  /* change font herer*/
+  font-size: 24px;
+    font-weight: 200;
+}
+
+.about-text h1 {
+  font-family: 'Montserrat', sans-serif;
+  /* change font herer*/
+  font-weight: bold;
+  /* Self Explanatory*/
+  font-size: 34px;
+    font-weight: 400;
+}
+
+.about-text p {
+  font-family: 'Montserrat', sans-serif;
+  /* change font herer*/
+  font-size: 24px;
+  font-weight: normal;
+    font-weight: 200;
+
+    
