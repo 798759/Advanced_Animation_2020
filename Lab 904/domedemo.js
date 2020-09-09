@@ -23,8 +23,8 @@ function init(){
 
 
 function animate(){
-for(var i=0; i<balls.length; i++){
     ctx.clearRect(0,0,canvas.width, canvas.height);
+for(var i=0; i<balls.length; i++){
     ctx.strokeStyle = 'rgba(155,180,50)';
     ctx.fillStyle = 'rgba(155,180, 50)';
     ctx.beginPath();
@@ -35,8 +35,8 @@ for(var i=0; i<balls.length; i++){
     balls[i].y += balls[i].dy;
     if(balls[i].x > window.innerWidth ||   balls[i].x < 0)    balls[i].dx = -  balls[i].dx;
     if(balls[i].y> window.innerHeight ||  balls[i].y < 0)    balls[i].dy = -  balls[i].dy;
-    requestAnimationFrame(animate);
   }
+  requestAnimationFrame(animate);
 }
 
 function loadBalls(num){
