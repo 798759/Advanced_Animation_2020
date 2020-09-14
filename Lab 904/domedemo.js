@@ -16,7 +16,7 @@ function init(){
   canvas.style.backgroundColor = 'rgba(0,24,35)';
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
-  loadBalls(10);
+  loadBalls(100);
   animate();
 }
 
