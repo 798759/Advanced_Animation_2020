@@ -12,5 +12,12 @@ function init(){
   ctx = canvas.getContext('2d');
   GameArea();
   Game();
-
+  animate();
+}
+function animate(){
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    for(var i=0; i<balls.length; i++){
+      balls[i].run();
+  }
+  requestAnimationFrame(animate);
 }

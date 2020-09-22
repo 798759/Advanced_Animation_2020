@@ -6,6 +6,7 @@ function GameArea(){
       // create tileMenuDiv
       this.tileMenuDiv = document.createElement("div");
       this.wrapperDiv.appendChild(this.tileMenuDiv)
-      this.tileMenuDiv.setAttribute("style"," background-color:#033c4a;width:900px;height:100px;float:left;");
+      this.tileMenuDiv.setAttribute("style"," background-color:#033c4a;width:900px;height:50px;float:left;");
+      wrapperDiv.appendChild(canvas);
 
 }
