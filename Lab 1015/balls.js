@@ -27,4 +27,7 @@ class Ball{
     this.checkEdges();
     this.move();
   }
+  ballsTouch(){
+    if(this.x+2*this.radius===balls[i].x)
+  }
 }
