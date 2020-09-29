@@ -1,7 +1,6 @@
 //  Bubble constructor function +++++++++++++++++++++++++++++
 function Bubble(x, y, dx, dy, rad, clr){
-    this.x = x;
-    this.y = y;
+    this.vector = new JSVector(x,y);
     this.dx = dx;
     this.dy = dy;
     this.rad = rad;///2;
@@ -42,13 +41,13 @@ Bubble.prototype.render = function(){
         ctx.strokeStyle = "rgba(255,255,255,255)"//this.clr;
         ctx.fillStyle = this.clr;
         ctx.beginPath();
-        ctx.arc(this.x,this.y, this.rad, Math.PI*2, 0, false);
+        ctx.arc(this.vector.x,this.vector.y, this.rad, Math.PI*2, 0, false);
         ctx.stroke();
         ctx.fill();
     }else{
         ctx.strokeStyle = this.clr;
         ctx.beginPath();
-        ctx.arc(this.x,this.y, this.rad, Math.PI*2, 0, false);
+        ctx.arc(this.vector.x,this.vector.y, this.rad, Math.PI*2, 0, false);
         ctx.stroke();
     }
 
@@ -59,8 +58,8 @@ Bubble.prototype.update = function(){
     if(!game.gamePaused){
       this.dx = Math.random()*6-3;
       this.dy = Math.random()*6-3;
-      this.x += this.dx;
-      this.y += this.dy;
+      this.vector.x += this.dx;
+      this.vector.y += this.dy;
     }
   }
 
