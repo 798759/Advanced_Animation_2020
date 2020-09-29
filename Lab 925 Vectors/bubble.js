@@ -23,7 +23,7 @@ Bubble.prototype.checkOverlapping = function(){
     let b = game.bubbles;
     for(let i = 0; i < b.length; i++){ // for all the bubbles
        if(this !== b[i]){   // if not this bubble
-         let d = Math.sqrt((this.x-b[i].x)*(this.x-b[i].x) + (this.y-b[i].y)*(this.y-b[i].y));
+         let d = this.vector.distance(b[i]);
          if(d < this.rad + b[i].rad){
             this.isOverlapping = true;
             this.clr =  "rgba(100,220,55,10)"
