@@ -1,8 +1,7 @@
 //  Bubble constructor function +++++++++++++++++++++++++++++
 function Bubble(x, y, dx, dy, rad, clr){
     this.vector = new JSVector(x,y);
-    this.dx = dx;
-    this.dy = dy;
+    this.vel = new JSVector(dx,dy);
     this.rad = rad;///2;
     this.clr = clr;
     this.isOverlapping = false;
@@ -23,7 +22,7 @@ Bubble.prototype.checkOverlapping = function(){
     let b = game.bubbles;
     for(let i = 0; i < b.length; i++){ // for all the bubbles
        if(this !== b[i]){   // if not this bubble
-         let d = this.vector.distance(b[i]);
+         let d = this.vector.distance(b[i].vector);
          if(d < this.rad + b[i].rad){
             this.isOverlapping = true;
             this.clr =  "rgba(100,220,55,10)"
@@ -56,18 +55,18 @@ Bubble.prototype.render = function(){
 // Move the bubble in a random direction
 Bubble.prototype.update = function(){
     if(!game.gamePaused){
-      this.dx = Math.random()*6-3;
-      this.dy = Math.random()*6-3;
-      this.vector.x += this.dx;
-      this.vector.y += this.dy;
+      this.vel.x = Math.random()*6-3;
+      this.vel.y = Math.random()*6-3;
+      this.vector.x += this.vel.x;
+      this.vector.y += this.vel.y;
     }
   }
 
 // When a bubble hits an edge of the canvas, it wraps around to the opposite edge.
 Bubble.prototype.checkEdges = function(){
     let canvas = game.canvas;
-    if(this.x > canvas.width)  this.x = 0; // wrap around from right to left
-    if(this.x < 0)  this.x = canvas.width; // wrap around from left to right
-    if(this.y > canvas.height)  this.y = 0; // wrap around from bottom to top
-    if(this.y < 0)  this.y = canvas.height; // wrap around from top to bottom
+    if(this.vector.x > canvas.width)  this.vector.x = 0; // wrap around from right to left
+    if(this.vector.x < 0)  this.vector.x = canvas.width; // wrap around from left to right
+    if(this.vector.y > canvas.height)  this.y = 0; // wrap around from bottom to top
+    if(this.vector.y < 0)  this.vector.y = canvas.height; // wrap around from top to bottom
   }

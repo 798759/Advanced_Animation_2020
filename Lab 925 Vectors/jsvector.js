@@ -2,7 +2,7 @@
 //  Add your name here
 //  Add project name here
 // The class constructor
-function JSVector(x = 0,y = 0){
+function JSVector(x= 0,y = 0){
         this.x = x;
         this.y = y;
 }
@@ -81,7 +81,7 @@ JSVector.prototype.limit = function(lim){
 
 // Get the distance between this vector and another one
 JSVector.prototype.distance = function(v2){
-  return(Math.sqrt((this.x-v2.x)*(this.x-v2.x) + (this.y-v2.y)*(this.y-v2.y)));
+  return(Math.sqrt(v2.x-this.x)*(v2.x-this.x)+ (v2.y-this.y)*(v2.y-this.y));
 }
 
 // Get square of the distance between this vector and another one
