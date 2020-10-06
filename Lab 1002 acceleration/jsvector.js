@@ -71,12 +71,17 @@ JSVector.prototype.divide = function(scalar){
 
 // Normalize this vector so that it has a magnitude of 1
 JSVector.prototype.normalize = function(){
-
+  var m = this.getMagnitude();
+if(m>0){
+  this.divide(m);
+  }
 }
 
 // Limit the magnitude of this vector
 JSVector.prototype.limit = function(lim){
-
+  if(this.getMagnitude>lim){
+    this.normalize;
+  }
 }
 
 // Get the distance between this vector and another one
@@ -94,7 +99,8 @@ JSVector.prototype.distanceSquared = function(v2){
 //                           |  sin   +cos  |
 
 JSVector.prototype.rotate = function(angle) {
-
+  this.x = Math.cos(angle*this.x)-Math.sin(angle*this.y);
+  this.y = Math.sin(angle*this.x)+Math.cos(angle*this.y);
 }
 
 // Get the angle between this vector and another one
@@ -104,7 +110,7 @@ JSVector.prototype.angleBetween = function(v2){
 
 // Make a copy of this vector
 JSVector.prototype.copy = function(){
-
+return JSVector(this.x,this.y);
 }
 
 // Override inherited toString() to describe this instance
