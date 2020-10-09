@@ -6,6 +6,7 @@ function Bubble(x, y, dx, dy, rad, clr){
     this.rad = rad;///2;
     this.clr = clr;
     this.isOverlapping = false;
+    this.center = new JSVector(canvas.width/2, canvas.height/2);
 }
 
   //  placing methods in the prototype (every bubble shares functions)
@@ -57,18 +58,21 @@ Bubble.prototype.render = function(){
 // Move the bubble in a random direction
 Bubble.prototype.update = function(){
   let b = game.bubbles;
-  b[0].acc = new JSVector(5,5);
+  var distanceToCenter;
     if(!game.gamePaused){
+distanceToCenter = this.loc.distance(this.center);
+  if(distanceToCenter <800){
+    this.acc = JSVector.subGetNew(this.center,this.loc);
+    this.acc.normalize();
+    this.acc.multiply(0.1);
+  }
+  if(distanceToCenter>150){
+    this.acc= -this.acc;
+  }
+  this.vel.limit(5);
+  this.vel.add(this.acc);
+  this.loc.add(this.vel);
 
-        this.acc.normalize();
-        this.acc.multiply(0.05);
-        this.vel.add(this.acc);
-        this.vel.limit(3);
-    this.loc=JSVector.subGetNew(this.loc,b[0].loc)
-      this.loc.x += this.vel.x;
-      this.loc.y += this.vel.y;
-      if(this.loc.distance(b[0])>200)
-      this.vel = -this.vel;
     }
   }
 
