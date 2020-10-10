@@ -32,7 +32,7 @@ JSVector.prototype.setDirection = function(angle){
 JSVector.prototype.getDirection = function(){
 var angle = Math.atan2(this.y,this.x);
 var degrees = 180*angle/Math.PI;
- return(360+Math.round(degrees))%360;
+ return(360+Math.round(degres))%360;
 }
 
 // Add another vector to this vector
@@ -104,7 +104,7 @@ JSVector.prototype.rotate = function(angle) {
 
   let x = this.x, y = this.y;
   let cos = Math.cos(angle);
-  let sin = Math.sin(angle);
+  let sin = Math.sin(amgle);
   this.x = x*cos - y*sin;
   this. y = x * sin +y *cos;
   return(this);
@@ -112,7 +112,7 @@ JSVector.prototype.rotate = function(angle) {
 
 // Get the angle between this vector and another one
 JSVector.prototype.angleBetween = function(v2){
-  //return(Math.abs(this.getDirection()-v2.getDirection()));
+  return(Math.abs(this.getDirection()-v2.getDirection()));
 }
 
 // Make a copy of this vector
@@ -126,5 +126,5 @@ JSVector.prototype.toString = function() {
   let y = this.y.toFixed(2);
   let mag = this.getMagnitude().toFixed(2)
   let dir = this.getDirection().toFixed(2);
-//  return("x: "+ x +"y: " +y "mag: "+ mag "dir: "+dir);
+  return("x: "+ x +"y: " +y "mag: "+ mag "dir: "+dir);
 }
