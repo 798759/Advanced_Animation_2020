@@ -126,5 +126,5 @@ JSVector.prototype.toString = function() {
   let y = this.y.toFixed(2);
   let mag = this.getMagnitude().toFixed(2)
   let dir = this.getDirection().toFixed(2);
-//  return("x: "+ x +"y: " +y "mag: "+ mag "dir: "+dir);
+
 }

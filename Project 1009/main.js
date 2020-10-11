@@ -1,6 +1,5 @@
 
-
-
+var mouseLoc;
 var game;   // a single global object
 
 window.onload = init;//  After the window has been loaded, go to init

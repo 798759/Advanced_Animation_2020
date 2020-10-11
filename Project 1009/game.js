@@ -1,5 +1,4 @@
 function Game(){
-
     this.gamePaused = false;    // the game may be paused or not
     this.ga = new GameArea();   // create all the dom elements
     // get the canvas as a property of the game
@@ -43,6 +42,9 @@ function Game(){
             console.log("Mouse Clicked");
           },false);
     }
+    this.canvas.addEventListener("mousemove",function(){
+      mouseLoc = new JSVector(event.clientX,event.clientY);
+    });
 
 }//++++++++++++++++++++++  end Bubbles constructor
 
