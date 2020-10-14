@@ -17,7 +17,7 @@ JSVector.prototype.setMagnitude = function(mag) {
 
 // Get the magnitude of the vector using pythagorean theorem
 JSVector.prototype.getMagnitude = function() {
-  return (Math.sqrt(this.x ^ 2 + this.y ^ 2))
+  return (Math.sqrt(this.x*this.x + this.y*this.y))
 }
 
 // Set the angle (direction) of the vector,
@@ -31,8 +31,7 @@ JSVector.prototype.setDirection = function(angle) {
 // Get the direction (angle) of the vector
 JSVector.prototype.getDirection = function() {
   var angle = Math.atan2(this.y, this.x);
-  var degrees = 180 * angle / Math.PI;
-  return (360 + Math.round(degrees)) % 360;
+ return(angle);
 }
 
 // Add another vector to this vector
@@ -71,15 +70,12 @@ JSVector.prototype.divide = function(scalar) {
 
 // Normalize this vector so that it has a magnitude of 1
 JSVector.prototype.normalize = function() {
-  var m = this.getMagnitude();
-  if (m > 0) {
-    this.divide(m);
-  }
+  this.setMagnitude(1);
 }
 
 // Limit the magnitude of this vector
 JSVector.prototype.limit = function(lim) {
-  if (this.getMagnitude > lim) {
+  if (this.getMagnitude() > lim) {
     this.setMagnitude(lim);
   }
 }

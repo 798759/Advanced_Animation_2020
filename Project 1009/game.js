@@ -10,7 +10,7 @@ function Game(){
 
     //   create the array of bubble objects
     this.bubbles = [];
-    let numBubbles = 150;
+    let numBubbles = 1;
     for(var i = 0; i < numBubbles; i++){
         var x, y, dx, dy, diam, clr, r, g, b;
         x = Math.random()*this.canvas.width;
@@ -42,8 +42,9 @@ function Game(){
             console.log("Mouse Clicked");
           },false);
     }
-    this.canvas.addEventListener("mousemove",function(){
+    this.canvas.addEventListener("mousemove",function(event){
       mouseLoc = new JSVector(event.clientX,event.clientY);
+      //console.log(mouseLoc);
     });
 
 }//++++++++++++++++++++++  end Bubbles constructor
