@@ -39,15 +39,18 @@ Bubble.prototype.render = function() {
 
 // Move the bubble in a random direction
 Bubble.prototype.update = function() {
+let b = game.bubbles;
   if (!game.gamePaused) {
+    if(attraction==false){
+    this.acc = JSVector.subGetNew(this.loc, mouseLoc);
+    }else{
       this.acc = JSVector.subGetNew(mouseLoc, this.loc);
-      this.acc.multiply(0.05);
+    }
+      this.acc.multiply(0.1);
       this.acc.normalize();
-      //this.acc.limit(.5);
-    this.vel.add(this.acc);
-    this.vel.limit(3);
-    this.loc.add(this.vel);
-
+      this.vel.add(this.acc);
+      this.vel.limit(3);
+      this.loc.add(this.vel);
   }
 }
 

@@ -1,4 +1,4 @@
-
+var attraction = true;
 var mouseLoc = new JSVector(400,400);
 var game;   // a single global object
 
