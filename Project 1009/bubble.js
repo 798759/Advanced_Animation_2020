@@ -6,7 +6,7 @@ function Bubble(x, y, dx, dy, rad, clr) {
   this.rad = rad; ///2;
   this.clr = clr;
   this.isOverlapping = false;
-  this.center = new JSVector(440,440);
+  this.center = new JSVector(440, 440);
   this.clr = "rgba(255,255,255,255)"
 }
 
@@ -39,18 +39,18 @@ Bubble.prototype.render = function() {
 
 // Move the bubble in a random direction
 Bubble.prototype.update = function() {
-let b = game.bubbles;
+  let b = game.bubbles;
   if (!game.gamePaused) {
-    if(attraction==false){
-    this.acc = JSVector.subGetNew(this.loc, mouseLoc);
-    }else{
+    if (attraction == false) {
+      this.acc = JSVector.subGetNew(this.loc, mouseLoc);
+    } else {
       this.acc = JSVector.subGetNew(mouseLoc, this.loc);
     }
-      this.acc.multiply(0.1);
-      this.acc.normalize();
-      this.vel.add(this.acc);
-      this.vel.limit(3);
-      this.loc.add(this.vel);
+    this.acc.multiply(0.1);
+    this.acc.normalize();
+    this.vel.add(this.acc);
+    this.vel.limit(3);
+    this.loc.add(this.vel);
   }
 }
 
