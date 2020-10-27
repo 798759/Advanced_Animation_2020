@@ -9,21 +9,8 @@ function Game() {
   this.ctx = this.canvas.getContext('2d'); // This is the context
 
   //   create the array of bubble objects
-  this.bubbles = [];
-  let numBubbles = 15;
-  for (var i = 0; i < numBubbles; i++) {
-    var x, y, dx, dy, diam, clr, r, g, b;
-    x = Math.random() * this.canvas.width;
-    y = Math.random() * this.canvas.height;
-    dx = Math.random() * 6 - 3;
-    dy = Math.random() * 6 - 3;
-    diam = 15; //Math.random()*20 + 10;
-    r = 255;
-    g = 255;
-    b = 255;
-    clr = "rgba(" + r + ", " + g + "," + b + ")"
-    this.bubbles.push(new Bubble()); // add new bubble to array
-  }
+this.createMover(this.ctx,10);
+
 
   //  Add event handlers to all tile objects
   for (let i = 0; i < this.ga.tiles.length; i++) {
@@ -55,27 +42,28 @@ function Game() {
 } //++++++++++++++++++++++  end Bubbles constructor
 
 // function to run the game each animation cycle
-Game.prototype.run = function() {
-  if (!this.gamePaused) {
-    for (let i = 0; i < this.bubbles.length; i++) {
-      this.bubbles[i].run(); // run each bubble
+Game.prototype.run = function () {
+  if(!this.gamePaused){
+    for(let i =0; i<this.movers.length; i++){
+      this.movers[i].run();
     }
   }
-}
+};
+
 Game.prototype.createMover = function (canvas,numMovers) {
-this.movers[];
-for(var i=0; , i<numMovers; i++){
+this.movers=[];
+for(var i=0;  i<numMovers; i++){
   var x, y, dx, dy, radius, clr, r, g, b, numOrbs;
   radius=7;
-  x = Math.random()* canvas.width;
-  y = Math.random()*canvas.height;
+  x = Math.random()* this.canvas.width;
+  y = Math.random()*this.canvas.height;
   dx = Math.random() *2-1;
   dy = Math.random() *2-1;
   r = Math.random() * 200+55;
   g = Math.random()*155
   b = Math.random()*155
   clr = "rgba("+r+","+g+","+b+")";
-  numOrbs = Math.floor(Math.random()+5+3);
+  numOrbs = Math.floor(Math.random()+5);
   this.movers[i] = new Mover(x,y,dx,dy,radius,clr,numOrbs);
 }
 };

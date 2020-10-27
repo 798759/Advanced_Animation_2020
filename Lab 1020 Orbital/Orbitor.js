@@ -1,49 +1,36 @@
-//  Bubble constructor function +++++++++++++++++++++++++++++
-function Bubble() {
-  this.angle = new JSVector(90, 0);
-  this.vel = new JSVector(Math.random()*0.05, Math.random()*0.05);
-  this.amp = new JSVector(Math.random()*canvas.width/2, Math.random()*canvas.height/2);
-}
+function Orbiter(mover, orbiterRad, orbitRad, angle, angleVel, clr){
+  this.mover = mover;
+  this.radius = orbiterRad;
+  this.rotator = new JSVector(orbitRad, 0);
+  this.rotator.setDirection(angle);
+  this.location = JSVector.addGetNew(this.mover.location, this.rotator);
+  this.angleVel = angleVel;
+  this.clr = clr;
+ }
 
-//  placing methods in the prototype (every bubble shares functions)
-Bubble.prototype.run = function() {
-  this.update();
-  this.render();
-}
-
-// check if this bubble is overlapping any other bubble
-
-
-// draw the bubble on the canvas
-Bubble.prototype.render = function() {
-    let ctx = game.ctx;
-    let x =  Math.sin(this.angle.x)*this.amp.x;
-    let y = Math.sin(this.angle.y)*this.amp.y;
-    ctx.strokeStyle = "rgba(255, 17, 0)";
-    ctx.save();
-    ctx.beginPath();
-    ctx.translate(canvas.width/2,canvas.height/2);
-    ctx.lineTo(0,0)
-    ctx.arc(x, y, 20, Math.PI*2, 0, false);
-    ctx.stroke();
-    ctx.fill();
-    ctx.restore();
+Orbiter.prototype.update = function(){
+  this.rotator.rotate(this.angleVel);
+  this.location = JSVector.addGetNew(this.mover.location, this.rotator);
 }
 
 
-// Move the bubble in a random direction
-Bubble.prototype.update = function() {
-  if (!game.gamePaused) {
-    this.angle.add(this.vel);
-  }
-}
+ Orbiter.prototype.render = function(){
+   let ctx = game.ctx;
 
+   //draw orbiter
+   ctx.strokeStyle = this.clr;
+   ctx.fillStyle = this.clr;
+   ctx.lineWidth = 1;
+   ctx.beginPath();
+   ctx.arc(this.location.x, this.location.y, this.radius, Math.PI*2, 0, false);
+   ctx.stroke();
+   ctx.fill();
 
-// When a bubble hits an edge of the canvas, it wraps around to the opposite edge.
-Bubble.prototype.checkEdges = function() {
-  let canvas = game.canvas;
-  if (this.loc.x > canvas.width) this.vel.x = -this.vel.x; // wrap around from right to left
-  if (this.loc.x < 0) this.loc.x = this.vel.x = -this.vel.x; // wrap around from left to right
-  if (this.loc.y > canvas.height) this.vel.y = -this.vel.y; // wrap around from bottom to top
-  if (this.loc.y < 0) this.vel.y = -this.vel.y; // wrap around from top to bottom
+   //draw line
+   ctx.lineCap = "round";
+   ctx.lineWidth = 4;
+   ctx.beginPath();
+   ctx.moveTo(this.mover.location.x, this.mover.location.y);
+   ctx.lineTo(this.location.x, this.location.y);
+   ctx.stroke();
 }
