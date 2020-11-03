@@ -3,6 +3,7 @@ function Snake(numSegments,x,y,dx,dy){
   this.vel = new JSVector(dx,dy)
   this.loc = new JSVector(x,y);
   this.numSegments=numSegments
+  this.dist = 10;
   for(let i =0; i<this.numSegments; i++){
     this.segments[i]=new JSVector(x+(10*i),y+(10*i));
   }
@@ -12,18 +13,16 @@ Snake.prototype.run = function () {
   this.move();
   this.render();
   this.checkEdges();
-
+  this.loc.add(this.vel);
 };
 Snake.prototype.move = function () {
-  this.loc.add(this.vel);
-  for(let i =0; i>this.segments.length; i++)
-    if(i!=0){
-      this.segments[i].loc=this.segments[i-1].loc;
-  }
-  else{
-    this.segments[i].loc= this.loc;
-  }
-};
+  var distance = new JSVector(0,0);
+  for(var i =this.segments.length-1; i>0; i--){
+  this.segments[i]=this.segments[i-1];
+}
+  this.segments[0]=this.loc;
+}
+
 Snake.prototype.render = function () {
   let ctx = game.ctx;
   for(let i =0; i<this.segments.length; i++){
