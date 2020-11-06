@@ -13,7 +13,7 @@ JSVector.prototype.setMagnitude = function(mag) {
   var direction = this.getDirection();
   this.x = Math.cos(direction) * mag;
   this.y = Math.sin(direction) * mag;
-  return (this);
+  return(this);
 }
 
 // Get the magnitude of the vector using pythagorean theorem
