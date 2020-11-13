@@ -15,7 +15,7 @@ Snake.prototype.run = function() {
   this.move();
   this.render();
   this.checkEdges();
-  this.loc.add(this.vel);
+  this.moveHead();
 };
 Snake.prototype.move = function() {
   for (let i=0; i < this.segments.length; i++) {
@@ -28,6 +28,10 @@ Snake.prototype.move = function() {
     this.segments[i]=JSVector.addGetNew(dist,this.segments[i-1]);
   }
 }
+}
+Snake.prototype.moveHead = function(){
+  this.loc.x = this.loc.x+this.loc.x;
+  this.loc.y = this.loc.y+Math.sin(this.vel*3.14);
 }
 
 Snake.prototype.render = function() {
