@@ -14,8 +14,8 @@ function Game() {
     var x, y, dx, dy
     x = Math.random() * this.canvas.width;
     y = Math.random() * this.canvas.height;
-    dx = Math.random() * 6 - 3;
-    dy = Math.random() * 6 - 3;
+    dx =7
+    dy = 7
     this.snake = new Snake(15,x,y,dx,dy);
 
 
