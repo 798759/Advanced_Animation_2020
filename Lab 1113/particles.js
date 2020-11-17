@@ -1,19 +1,18 @@
 function Particle(x,y){
 this.loc = new JSVector(x,y);
-this.vel = new JSVector(10,10);
-this.acc = new JSVector(0,0);
-this.lifespan = 300;
+this.vel = new JSVector(Math.random()*2-1,Math.random()*2-2);
+this.acc = new JSVector(0,.05);
+this.lifespan = Math.random()*300;
 }
 
 Particle.prototype.run = function () {
-this.checkEdges();
 this.render()
 this.update();
+this.checkEdges();
 };
 Particle.prototype.update = function () {
 this.loc.add(this.vel);
 this.vel.add(this.acc);
-this.vel.setMagnitude(5);
 this.lifespan = this.lifespan-1;
 };
 Particle.prototype.render = function () {
@@ -28,24 +27,36 @@ ctx.fill();
 };
 Particle.prototype.checkEdges = function () {
   let canvas = game.canvas;
-  if (this.loc.x > canvas.width) this.vel.x = -this.vel.x;
-  if (this.loc.x < 0) this.loc.x = this.vel.x = -this.vel.x;
-  if (this.loc.y > canvas.height) this.vel.y = -this.vel.y;
-  if (this.loc.y < 0) this.vel.y = -this.vel.y;
+  if (this.loc.x > canvas.width&this.loc.x < 0&this.loc.y > canvas.height&this.loc.y < 0){
+    this.lifespan=0;
+  }
+
 };
 
-function AllTheParticle(numOfParticles) {
+function AllTheParticle(numOfParticles,x,y) {
 this.particles = [];
-for(var i=0; i>numOfParticles; i++){
-  this.particles[i] = new Particle(Math.Random(),Math.Random());
+this.loc = new JSVector(x,y)
+for(var i=0; i<numOfParticles; i++){
+  this.particles[i] = new Particle(this.loc.x,this.loc.y);
   }
 }
 
 AllTheParticle.prototype.run = function () {
-  for(var i=0; i>this.particles.length; i++0{
+  for(var i=0; i<this.particles.length; i++){
     this.particles[i].run();
-  })
+  }
+  this.removeDeadParticles();
 };
-AllTheParticle.prototype.removeDeadBalls = function () {
+AllTheParticle.prototype.removeDeadParticles = function () {
+  for(var i=0; i<this.particles.length; i++){
+    if(this.particles[i].lifespan<0){
+      this.particles.splice(i,1);
+      i--;
+      this.addParticle();
+    }
+    }
 
+};
+AllTheParticle.prototype.addParticle = function () {
+  this.particles.push(new Particle(this.loc.x,this.loc.y));
 };

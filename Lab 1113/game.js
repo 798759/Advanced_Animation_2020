@@ -11,12 +11,7 @@ function Game() {
   //   create the array of bubble objects
 
 
-    var x, y, dx, dy
-    x = Math.random() * this.canvas.width;
-    y = Math.random() * this.canvas.height;
-    dx =7
-    dy = 7
-    this.snake = new Particle(10,10);
+    this.myparticle = new AllTheParticle(10,this.canvas.width/2,this.canvas.height/2);
 
 
   //  Add event handlers to all tile objects
@@ -51,6 +46,6 @@ function Game() {
 // function to run the game each animation cycle
 Game.prototype.run = function() {
   if (!this.gamePaused) {
-    this.snake.run();
+    this.myparticle.run();
     }
   }
