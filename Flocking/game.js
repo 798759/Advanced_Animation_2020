@@ -22,12 +22,14 @@ function Game(){
         slider.addEventListener('input',updateSlider);  // update display value when it changes
     }
        this.boidSystem = [];
+       this.numBoids = 10;
+       this.setup();
 
 } //++++++++++++++++++++++  end Game
 
 // function to run the game each animation cycle
-Game.prototype.setup = function (numBoids) {
-  for(var i=0; i<numBoids; i++){
+Game.prototype.setup = function () {
+  for(var i=0; i<this.numBoids; i++){
     this.boidSystem[i]= new Boid(100,100);
   }
 };
