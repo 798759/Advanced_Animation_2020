@@ -1,5 +1,5 @@
-function Boid(x, y) {
-  this.loc = new JSVector(x, y);
+function Boid(x,y) {
+  this.loc = new JSVector(x,y);
   let dx = Math.random() * 4 - 2;
   let dy = Math.random() * 4 - 2;
   this.vel = new JSVector(dx, dy);
@@ -20,21 +20,23 @@ Boid.prototype.run = function() {
 Boid.prototype.update = function() {
   this.loc.add(this.vel);
   this.vel.add(this.acc);
+  this.vel.limit(2);
   this.flock(game.boidSystem);
 
 };
 Boid.prototype.flock = function(boids) {
   var sep = this.separate(boids);
   var ali = this.align(boids);
-//  var coh = this.cohesion(boids);
+  var coh = this.cohesion(boids);
 
-  sep.multiply(1.5);
+  sep.multiply(.5);
   ali.multiply(1.0);
-  //coh.multiply(1.0);
+  coh.multiply(1.0);
 
   this.acc.add(sep);
-  //this.acc.add(ali);
-  //this.acc.add(coh);
+  this.acc.add(ali);
+  this.acc.add(coh);
+
 
 
 }
@@ -43,10 +45,12 @@ Boid.prototype.separate = function(boids){
   for(var i=0; i<boids.length; i++){
     if(boids[i]!=this){
       var distance = this.loc.distance(boids[i].loc);
-      if(distance<20){
+      if(distance<70){
         var sepForce = JSVector.subGetNew(this.loc,boids[i].loc);
         sepForce.normalize();
+        sepForce.multiply(.1);
         sep.add(sepForce);
+
       }
     }
   }
@@ -54,10 +58,29 @@ Boid.prototype.separate = function(boids){
 
 }
 
-Boid.prototype.align = function() {
-  var sum = new JSVector(0, 0);
-
+Boid.prototype.align = function(boids) {
+  let sum = new JSVector(0,0);
+  let count = 0;
+  for(var i=0; i<boids.length;i++){
+    let d = this.loc.distance(boids[i].loc);
+    if((d>0) && (d<this.neighborDist)){
+      sum.add(boids[i].vel);
+      count++;
+    }
+  }
+  if(count>0){
+    sum.divide(count);
+    sum.normalize();
+    let steer = sum.sub(this.vel);
+    steer.limit(5);
+    return steer;
+  }
+  else{
+    return new JSVector(0,0);
+  }
 }
+
+
 
 Boid.prototype.cohesion = function(boids) {
   var neighbordist = 50;
@@ -65,7 +88,7 @@ Boid.prototype.cohesion = function(boids) {
   var count = 0;
   for (var i = 0; i < boids.length; i++) {
     if (boids[i].loc != boids.loc) {
-      var d = JSVector.distance(this.loc, boids[i]);
+      var d = this.loc.distance(boids[i].loc);
       if (d > 0 && d < neighbordist) {
         sum.add(boids[i]);
         count++;
@@ -80,7 +103,14 @@ Boid.prototype.cohesion = function(boids) {
   }
 }
 
-
+Boid.prototype.seek = function(target){
+  let desired = target.sub(this.loc);
+  desired.normalize();
+  desired.multiply(game.slider2.value);
+  let steer = desired.sub(this.vel);
+  steer.limit(game.slider1.value);
+  return steer;
+}
 
 
 

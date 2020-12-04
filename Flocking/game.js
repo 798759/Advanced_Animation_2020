@@ -22,7 +22,7 @@ function Game(){
         slider.addEventListener('input',updateSlider);  // update display value when it changes
     }
        this.boidSystem = [];
-       this.numBoids = 10;
+       this.numBoids = 100;
        this.setup();
 
 } //++++++++++++++++++++++  end Game
@@ -30,7 +30,7 @@ function Game(){
 // function to run the game each animation cycle
 Game.prototype.setup = function () {
   for(var i=0; i<this.numBoids; i++){
-    this.boidSystem[i]= new Boid(100,100);
+    this.boidSystem[i]= new Boid(Math.random()*canvas.width,Math.random()*canvas.height);
   }
 };
 Game.prototype.run = function(){
