@@ -24,14 +24,13 @@ Snake.prototype.move = function() {
     }
     if(i!==0){
     var dist = JSVector.subGetNew(this.segments[i],this.segments[i-1]);
-    dist.setMagnitude(20);
-    this.segments[i]=JSVector.addGetNew(dist,this.segments[i-1]);
+    dist.setMagnitude(this.segments.length);
+    this.segments[i]=JSVector.addGetNew(this.segments[i-1],dist);
   }
 }
 }
 Snake.prototype.moveHead = function(){
-  this.loc.x = this.loc.x+this.loc.x;
-  this.loc.y = this.loc.y+Math.sin(this.vel*3.14);
+  this.loc.add(this.vel);
 }
 
 Snake.prototype.render = function() {
