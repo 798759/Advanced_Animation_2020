@@ -23,6 +23,7 @@ function Game(){
     }
     this.boidSystem=[];
     this.setup();
+    this.snake;
 
 
 } //++++++++++++++++++++++  end Game

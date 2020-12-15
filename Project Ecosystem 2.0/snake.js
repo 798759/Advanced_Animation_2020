@@ -2,6 +2,7 @@ function Snake( x, y,) {
   this.segments = [];
   this.vel = new JSVector(2, 2)
   this.loc = new JSVector(x, y);
+  this.acc = new JSVector(0,0);
   this.numSegments = 15;
   this.dist = 10;
   let distance = 20;
@@ -32,6 +33,7 @@ Snake.prototype.move = function() {
 }
 Snake.prototype.moveHead = function(){
   this.loc.add(this.vel);
+  this.vel.add(this.acc);
 }
 
 Snake.prototype.render = function() {
@@ -59,11 +61,14 @@ Snake.prototype.render = function() {
 }
 
 Snake.prototype.eat = function(){
-  var distanceToBoid
-  for(var i=0; i>game.boidSystem.length; i++){
+  var distanceToBoid=0;
+  for(var i=0; i<game.boidSystem.length; i++){
     distanceToBoid=this.loc.distance(game.boidSystem[i].loc);
-    if(distacneToBoid>20){
-
+    if(this.distacneToBoid>20){
+      this.acc = JSVector.subGetNew(this.loc,game.boidSystem[i].loc);
+    }
+    if(this.loc===game.boidSystem[i].loc){
+      game.boidSystem[i].splice(x, 1);
     }
   }
 }
