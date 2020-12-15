@@ -15,6 +15,7 @@ Snake.prototype.run = function() {
   this.move();
   this.render();
   this.checkEdges();
+  this.eat();
   this.moveHead();
 };
 Snake.prototype.move = function() {
@@ -62,7 +63,7 @@ Snake.prototype.eat = function(){
   for(var i=0; i>game.boidSystem.length; i++){
     distanceToBoid=this.loc.distance(game.boidSystem[i].loc);
     if(distacneToBoid>20){
-      
+
     }
   }
 }
