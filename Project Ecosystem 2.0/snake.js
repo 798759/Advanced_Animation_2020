@@ -67,7 +67,7 @@ Snake.prototype.eat = function(){
     if(this.distacneToBoid>20){
       this.acc = JSVector.subGetNew(this.loc,game.boidSystem[i].loc);
     }
-    if(this.loc===game.boidSystem[i].loc){
+    if(this.loc==game.boidSystem[i].loc){
       game.boidSystem[i].splice(x, 1);
     }
   }

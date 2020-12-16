@@ -8,6 +8,7 @@ function Boid(x,y) {
   this.maxForce = .1;
   this.scl = 10;
   this.clr = "rgba(255,100,50)";
+  this.lifespan = 1;
 }
 
 Boid.prototype.run = function() {
@@ -23,6 +24,9 @@ Boid.prototype.update = function() {
   this.vel.add(this.acc);
   this.loc.add(this.vel);
   this.vel.limit(this.maxSpeed);
+  if(this.lifespan==Math.random()*10){
+    this.clr = "0,0,0";
+  }
 };
 Boid.prototype.flock = function(boids) {
   var sep = this.separate(boids);
