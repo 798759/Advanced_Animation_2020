@@ -1,5 +1,5 @@
 function Game(){
-
+    this.snake= new Snake(0,0);
     this.canvas1 = document.getElementById('cnv1');
     this.context1 = this.canvas1.getContext('2d');
     this.canvas2 = document.getElementById('cnv2');
@@ -104,5 +104,11 @@ Game.prototype.run = function(){
 
   ctx1.restore();
   ctx2.restore();
+  this.runCreatures();
+  ctx1.restore();
+  ctx2.restore();
+}
 
+Game.prototype.runCreatures=function(){
+  this.snake.run();
 }
