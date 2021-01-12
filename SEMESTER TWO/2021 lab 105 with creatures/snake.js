@@ -1,6 +1,6 @@
 function Snake() {
   this.segments = [];
-  this.vel = new JSVector(2, 2)
+  this.vel = new JSVector(-2, 2)
   this.loc = new JSVector(0, 0);
   this.acc = new JSVector(0,0);
   this.numSegments = 15;
@@ -15,7 +15,7 @@ function Snake() {
 Snake.prototype.run = function() {
   this.move();
   this.render();
-  this.checkEdges();
+   this.checkEdges();
   //this.eat();
   this.moveHead();
 };
@@ -98,9 +98,11 @@ Snake.prototype.eat = function(){
 }
 
 Snake.prototype.checkEdges = function() {
-  let canvas = game.context1;
-  if (this.loc.x > canvas.width) this.vel.x = -this.vel.x; // wrap around from right to left
-  if (this.loc.x < 0) this.loc.x = this.vel.x = -this.vel.x; // wrap around from left to right
-  if (this.loc.y > canvas.height) this.vel.y = -this.vel.y; // wrap around from bottom to top
-  if (this.loc.y < 0) this.vel.y = -this.vel.y; // wrap around from top to bottom
+  let world = game.world;
+if (this.loc.x > world.right || this.loc.x < world.left){
+  this.vel.x = -this.vel.x;
+}
+if (this.loc.y < world.top || this.loc.y > world.bottom){
+  this.vel.y = -this.vel.y;
+}
 }
