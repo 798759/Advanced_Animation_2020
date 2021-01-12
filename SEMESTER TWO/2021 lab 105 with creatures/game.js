@@ -85,7 +85,6 @@ Game.prototype.run = function(){
   ctx2.lineWidth = 30;
   ctx2.strokeStyle = "rgba(240, 52, 52, 1)"
   ctx2.scale(this.scaleX, this.scaleY);
-
   //center canvas2 in world
   ctx2.translate(this.world.width/2, this.world.height/2);
 
@@ -102,8 +101,6 @@ Game.prototype.run = function(){
   ctx2.lineTo(this.world.right, 0);
   ctx2.stroke();
 
-  ctx1.restore();
-  ctx2.restore();
   this.runCreatures();
   ctx1.restore();
   ctx2.restore();

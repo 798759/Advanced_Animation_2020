@@ -1,13 +1,13 @@
-function Snake( x, y,) {
+function Snake() {
   this.segments = [];
   this.vel = new JSVector(2, 2)
-  this.loc = new JSVector(x, y);
+  this.loc = new JSVector(0, 0);
   this.acc = new JSVector(0,0);
   this.numSegments = 15;
   this.dist = 10;
   let distance = 20;
   for (let i = 0; i < this.numSegments; i++) {
-    this.segments[i] = new JSVector(x - distance, y - distance);
+    this.segments[i] = new JSVector(this.loc.x - distance, this.loc.y - distance);
     distance = distance - 20;
   }
 }
@@ -15,7 +15,7 @@ function Snake( x, y,) {
 Snake.prototype.run = function() {
   this.move();
   this.render();
-  //this.checkEdges();
+  this.checkEdges();
   //this.eat();
   this.moveHead();
 };
@@ -38,6 +38,7 @@ Snake.prototype.moveHead = function(){
 
 Snake.prototype.render = function() {
   let ctx = game.context1;
+  let ctx2 = game.context2;
   for (let i = 0; i < this.segments.length; i++) {
     ctx.lineWidth= 20-i;
     ctx.lineCap = "round";
@@ -58,7 +59,30 @@ Snake.prototype.render = function() {
   //ctx.arc(this.loc.x, this.loc.y, 10, Math.PI * 2, 0, false);
   ctx.stroke();
   ctx.fill();
+  for (let i = 0; i < this.segments.length; i++) {
+    ctx2.lineWidth= 20-i;
+    ctx2.lineCap = "round";
+    ctx2.strokeStyle = "rgba(255,0,0,.5)" //this.clr;
+    ctx2.fillStyle = this.clr;
+    ctx2.beginPath();
+    //ctx.arc(this.segments[i].x, this.segments[i].y, 10, Math.PI * 2, 0, false);
+    ctx2.moveTo(this.segments[i].x,this.segments[i].y);
+    if(i!==0){
+    ctx2.lineTo(this.segments[i-1].x,this.segments[i-1].y)
+  }
+    ctx2.stroke();
+    ctx2.fill();
+  }
+  ctx2.strokeStyle = "rgba(255,0,0)" //this.clr;
+  ctx2.fillStyle = this.clr;
+  ctx2.beginPath();
+  //ctx.arc(this.loc.x, this.loc.y, 10, Math.PI * 2, 0, false);
+  ctx2.stroke();
+  ctx2.fill();
+
 }
+
+
 
 Snake.prototype.eat = function(){
   var distanceToBoid=0;
