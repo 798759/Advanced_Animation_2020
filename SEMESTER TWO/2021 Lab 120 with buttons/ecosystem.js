@@ -43,7 +43,7 @@ class EcoSystem {
          console.log("hi")
        }
      });
-
+     this.playerOne = new Player(400,300);
 
 
               // canvas2 is scaled according to the ratio of its
@@ -56,20 +56,25 @@ class EcoSystem {
         window.addEventListener("keypress", function (event) {
             switch (event.code) {
                 case "KeyW":
+                ecoSystem.playerOne.loc.y-=this.ecoSystem.cellWidth;
                     if (ecoSystem.canvas1Loc.y + 100 > ecoSystem.world.top)
-                        ecoSystem.canvas1Loc.y -= 20;
+                        ecoSystem.canvas1Loc.y -= this.ecoSystem.cellWidth;
+
                     break;
                 case "KeyS":
+                ecoSystem.playerOne.loc.y+=this.ecoSystem.cellWidth;
                     if (ecoSystem.canvas1Loc.y + ecoSystem.canvas1.height - 100 < ecoSystem.world.bottom)
-                        ecoSystem.canvas1Loc.y += 20;
+                        ecoSystem.canvas1Loc.y += this.ecoSystem.cellWidth;
                     break;
                 case "KeyA":
+                  ecoSystem.playerOne.loc.x-=this.ecoSystem.cellWidth;
                     if (ecoSystem.canvas1Loc.x + 100 > ecoSystem.world.left)
-                        ecoSystem.canvas1Loc.x -= 20;
+                        ecoSystem.canvas1Loc.x -= this.ecoSystem.cellWidth;
                     break;
                 case "KeyD":
+                ecoSystem.playerOne.loc.x+=this.ecoSystem.cellWidth;
                     if (ecoSystem.canvas1Loc.x + ecoSystem.canvas1.width - 100 < ecoSystem.world.right)
-                        ecoSystem.canvas1Loc.x += 20;
+                        ecoSystem.canvas1Loc.x += this.ecoSystem.cellWidth;
                     break;
                     break;
             }
@@ -138,6 +143,7 @@ class EcoSystem {
             this.cells[r][c].run();
           }
         }
+        this.playerOne.run();
 
 
         ctx1.restore();
