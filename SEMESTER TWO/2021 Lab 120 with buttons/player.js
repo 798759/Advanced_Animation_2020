@@ -6,7 +6,6 @@ class Player {
   }
   run() {
     this.render();
-    this.move();
   }
   render() {
     let ctx = ecoSystem.context1;
@@ -20,8 +19,5 @@ class Player {
     ctx.fill();
     ctx.restore();
 
-  }
-  move() {
-  
   }
 }
