@@ -23,6 +23,14 @@ function Game(){
             this.grid[r][c] = new Cell(this, r, c);
         }
     }
+    this.canvas.addEventListener("click",function(){
+      for (let r = 0; r < this.grid.length; r++) {
+          for (let c = 0; c < this.grid[r].length; c++) {
+              if(event.cleintX>){
+
+              }
+          }
+    })
 
     // Create a path for the actors to follow.
     // The path is an array of cells as specified in a separate file.

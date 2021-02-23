@@ -8,6 +8,7 @@ class Cell {
         this.r = r;
         this.c = c;
         this.isPath = false;
+        this.state;
         // this.num = num
         // let red = Math.random() * 2;
         // let grn = Math.random() * 200 + 55;
@@ -26,6 +27,10 @@ class Cell {
         if(this.isPath) {
             ctx.fillStyle = "burlywood";
             ctx.fillRect(this.loc.x, this.loc.y,this.width, this.height);
+        }
+        if (this.state){
+          ctx.fillStyle="black"
+          ctx.fillRect(this.loc.x, this.loc.y,this.width, this.height);
         }
         //render cell
         // ctx.fillStyle = this.clr;

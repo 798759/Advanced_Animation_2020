@@ -32,7 +32,7 @@ class EcoSystem {
          }
        }
 
-       this.canvas1.addEventListener("click",function(a){
+       this.canvas.addEventListener("click",function(a){
          let col = Math.floor((a.offsetX+ecoSystem.canvas1Loc.x-ecoSystem.world.left)/ecoSystem.cellWidth);
            let row = Math.floor((a.offsetY+ecoSystem.canvas1Loc.y-ecoSystem.world.top)/ecoSystem.cellHeight);
            if((col>=0 && col<ecoSystem.numCols) && (row>=0 && row<ecoSystem.numRows)){
