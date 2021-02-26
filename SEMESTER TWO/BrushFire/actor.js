@@ -26,27 +26,34 @@ class Actor {
     }
 
     update(){
-        // move this actor along the path until it reaches the end of
-        // the path and dies
-        let t
-      if(this.lastCell !=this.currentCell){
-          if(this.currentCell!=this.nextCell){
-             this.d = this.loc.distance(this.target);
-            this.acc = JSVector.subGetNew(this.target, this.loc);
-            this.acc.normalize();
-            this.vel.add(this.acc);
-            this.vel.limit(this.maxSpeed);
-            this.loc.add(this.vel);
-          }
-          if(this.d<=25){
-            this.pathIndex++;
-            this.currentCell = this.game.path[this.pathIndex];
-            this.nextCell = this.game.path[this.pathIndex+1];
-            this.target =  new JSVector(this.nextCell.loc.x + this.nextCell.width/2,
-                                this.nextCell.loc.y + this.nextCell.height/2);
-          }
-        }
-    }
+      if(this.currentCell!=this.lastCell){
+               this.findNextCell();
+               let d = this.loc.distance(this.target);
+               this.acc = JSVector.subGetNew(this.target, this.loc);
+               this.acc.normalize();
+               this.acc.multiply(0.08);
+               this.vel.add(this.acc);
+               this.vel.limit(this.maxSpeed);
+               this.loc.add(this.vel);
+
+               if(d<=25){
+                 this.currentCell = this.nextCell;
+                 this.findNextCell();
+               }
+             }
+             if(this.currentCell==this.lastCell){
+               this.loc = this.lastCell.center;
+               this.lastCell.clr = "yellow"
+             }
+           }
+           findNextCell(){
+             for(let i=0; i<this.currentCell.neighbors.length; i++){
+               if(this.currentCell.neighbors[i].dist<this.nextCell.dist){
+                 this.nextCell = this.currentCell.neighbors[i];
+                 this.target = new JSVector(this.nextCell.loc.x + this.nextCell.width/2, this.nextCell.loc.y + this.nextCell.height/2);
+               }
+             }
+           }
 
 
     render(){

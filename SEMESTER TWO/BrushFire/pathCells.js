@@ -1,6 +1,7 @@
 // rows and columns of cells to form a path
 // in a grid of 13 rows of 20 columns
 
+
 var pathCells = [
     [0,3],  // row 0 column 3
     [1,3],  // row 1 column 3
