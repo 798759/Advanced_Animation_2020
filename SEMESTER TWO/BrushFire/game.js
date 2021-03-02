@@ -15,9 +15,9 @@ function Game() {
   this.numRows = 13;
   this.cellHeight = this.canvas.height / this.numRows;
 
-  // Create the two-dimensional grid of cells
+
   this.grid = new Array(this.numRows);
-  // Populate the grid of cells
+
   this.arrLoaded = false;
   for (let r = 0; r < this.grid.length; r++) {
     this.grid[r] = new Array(this.numCols);
@@ -37,23 +37,20 @@ function Game() {
     let r = Math.floor((e.offsetX + game.canvasLoc.y) / game.cellHeight);
     if ((c >= 0 && game.numCols) && (r >= 0 && r < game.numRows)) {
       game.grid[r][c].state = !game.grid[r][c].state;
-      //game.loadAllNeighbors();
-      console.log("hi");
+      game.loadAllNeighbors();
     }
 
   });
 
-  // Create a path for the actors to follow.
-  // The path is an array of cells as specified in a separate file.
   this.path = [];
   for (let c = 0; c < pathCells.length; c++) {
     let cell = this.grid[pathCells[c][0]][pathCells[c][1]];
     cell.isPath = true;
     this.path.push(cell);
   }
+  this.distances();
 
-  // Create an actor to follow the path.
-  // Additional actors may be created periodically.
+
   this.actors = [];
   for (let i = 0; i < 10; i++) {
     let r = Math.floor(Math.random() * (this.numRows - 1));
@@ -89,7 +86,7 @@ Game.prototype.distances = function() {
     count++;
     currentCell = queue.shift();
     for (let i = 0; i < currentCell.neighbors.length; i++) {
-      if (!currentCell.neighbors[i].parent && !currentCell.neighbors[i].state) {
+      if (!currentCell.neighbors[i].parent && !currentCell.neighbors[i].occupied) {
         currentCell.neighbors[i].dist = currentCell.dist + 10;
         currentCell.neighbors[i].parent = currentCell;
         queue.push(currentCell.neighbors[i]);

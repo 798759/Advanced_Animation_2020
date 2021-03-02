@@ -1,23 +1,15 @@
-// Actor class.  Each actor starts life at the beginning of a path
-// and follows that path to the end where it dies.
-
 class Actor {
-    constructor(game){
-        // start off the actor in the first cell of the path
+    constructor(game, cell){
         this.game = game;
-        this.pathIndex = 0;
-        this.currentCell = game.path[this.pathIndex];
-        this.nextCell = game.path[this.pathIndex+1];   // next in the path of cells
-        // where this actor should aim -- the center of the next cell in the path
-        this.target = new JSVector(this.nextCell.loc.x + this.nextCell.width/2,
-                            this.nextCell.loc.y + this.nextCell.height/2);
-        this.lastCell = game.path[game.path.length-1];  // end of the path
-        // position the actor initially in the center of the first cell
+        this.currentCell = cell;
         this.loc = new JSVector(this.currentCell.loc.x + this.currentCell.width/2,
                                 this.currentCell.loc.y + this.currentCell.height/2);
-        this.vel = new JSVector(0,0);
-        this.acc = new JSVector(0,0);
-        this.maxSpeed=1;
+        this.nextCell = this.currentCell;
+        this.target = new JSVector(this.nextCell.loc.x + this.nextCell.width/2, this.nextCell.loc.y + this.nextCell.height/2);
+        this.lastCell = game.grid[game.numRows-1][game.numCols-1];
+        this.vel = new JSVector(0,0);   // velocity
+        this.acc = new JSVector(0,0);   //steering acceleration
+        this.maxSpeed = 1;
     }
 
     run() {
@@ -26,43 +18,43 @@ class Actor {
     }
 
     update(){
-      if(this.currentCell!=this.lastCell){
-               this.findNextCell();
-               let d = this.loc.distance(this.target);
-               this.acc = JSVector.subGetNew(this.target, this.loc);
-               this.acc.normalize();
-               this.acc.multiply(0.08);
-               this.vel.add(this.acc);
-               this.vel.limit(this.maxSpeed);
-               this.loc.add(this.vel);
+        if(this.currentCell!=this.lastCell){
+          this.findNextCell();
+          let d = this.loc.distance(this.target);
+          this.acc = JSVector.subGetNew(this.target, this.loc);
+          this.acc.normalize();
+          this.acc.multiply(0.08);
+          this.vel.add(this.acc);
+          this.vel.limit(this.maxSpeed);
+          this.loc.add(this.vel);
 
-               if(d<=25){
-                 this.currentCell = this.nextCell;
-                 this.findNextCell();
-               }
-             }
-             if(this.currentCell==this.lastCell){
-               this.loc = this.lastCell.center;
-               this.lastCell.clr = "yellow"
-             }
-           }
-           findNextCell(){
-             for(let i=0; i<this.currentCell.neighbors.length; i++){
-               if(this.currentCell.neighbors[i].dist<this.nextCell.dist){
-                 this.nextCell = this.currentCell.neighbors[i];
-                 this.target = new JSVector(this.nextCell.loc.x + this.nextCell.width/2, this.nextCell.loc.y + this.nextCell.height/2);
-               }
-             }
-           }
+          if(d<=25){
+            this.currentCell = this.nextCell;
+            this.findNextCell();
+          }
+        }
+        if(this.currentCell==this.lastCell){
+          this.loc = this.lastCell.center;
+          this.lastCell.clr = "yellow"
+        }
+      }
 
+      render(){
+          let ctx = game.ctx;
+          ctx.strokeStyle = "black";
+          ctx.fillStyle = "brown";
+          ctx.beginPath();
+          ctx.arc(this.loc.x, this.loc.y, 6, 0, Math.PI*2);
+          ctx.fill();
+          ctx.stroke();
+      }
 
-    render(){
-        let ctx = game.ctx;
-        ctx.strokeStyle = "black";
-        ctx.fillStyle = "brown";
-        ctx.beginPath();
-        ctx.arc(this.loc.x, this.loc.y, 6, 0, Math.PI*2);
-        ctx.fill();
-        ctx.stroke();
+    findNextCell(){
+      for(let i=0; i<this.currentCell.neighbors.length; i++){
+        if(this.currentCell.neighbors[i].dist<this.nextCell.dist){
+          this.nextCell = this.currentCell.neighbors[i];
+          this.target = new JSVector(this.nextCell.loc.x + this.nextCell.width/2, this.nextCell.loc.y + this.nextCell.height/2);
+        }
+      }
     }
 }

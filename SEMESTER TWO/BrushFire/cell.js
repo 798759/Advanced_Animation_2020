@@ -1,6 +1,5 @@
 class Cell {
-    constructor(game, r, c, state) {
-        let ctx = game.ctx;
+    constructor(game, r, c, occ) {
         this.game = game;
         this.width = game.cellWidth;
         this.height = game.cellHeight;
@@ -9,41 +8,39 @@ class Cell {
         this.loc = new JSVector(x, y);
         this.r = r;
         this.c = c;
-        this.state =state;
-        this.dist = 1000000;
+        this.occupied = occ;
+        this.dist=1000;
         this.parent = null;
         this.clr;
         if(r==game.numRows-1 && c==game.numCols-1){
-          this.clr = "green"
+          this.clr = "rgba(255, 213, 0)"
         }
-        else if(this.state == true){
-          this.clr = "brown"
+        else if(this.occupied == true){
+          this.clr = "black"
         }
         else if(!this.parent){
-          this.clr = "blurywood"
+          this.clr = "rgba(128, 100, 24)"
         }
-       this.neighbors = new Array();
-       this.center = new JSVector(this.loc.x+this.game.cellWidth/2, this.loc.y+this.game.cellHeight/2);
-    }//  +++++++++  end constructor
+        this.neighbors = new Array();
+        this.center = new JSVector(this.loc.x+this.game.cellWidth/2, this.loc.y+this.game.cellHeight/2);
+    }
 
     run() {
         this.render();
     }
 
     render() {
-        let ctx = game.ctx;
-        ctx.fillRect(this.loc.x, this.loc.y,this.width, this.height);
-        ctx.strokeStyle = "black";
-        this.fillStyle=this.clr;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.rect(this.loc.x, this.loc.y, this.width, this.height);
-        // ctx.fill();
-        ctx.stroke();
-        // ctx.font = '10px serif';
-        // ctx.strokeText("r = " + this.r, this.loc.x + 5, this.loc.y + 11);
-        // ctx.strokeText("c = " + this.c, this.loc.x + 5, this.loc.y + 31);
+      let ctx = this.game.ctx;
+      ctx.strokeStyle = "black";
+      ctx.fillStyle=this.clr;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.rect(this.loc.x, this.loc.y, this.width, this.height);
+      ctx.fill();
+      ctx.stroke();
+
     }
+
     loadNeighbors(){
   if(this.game.arrLoaded && this.neighbors.length==0){
     if(this.r>0){//north
@@ -60,4 +57,5 @@ class Cell {
     }
   }
 }
+
 }//+++++++++++++++++++++  end of Cell class
